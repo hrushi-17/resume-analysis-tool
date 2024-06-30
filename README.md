@@ -1,4 +1,4 @@
-# Resume Analysis Tool
+# <h1>Resume Analysis Tool<h1>
 # About the Project
 The Resume Analysis Tool is a web application designed to analyze technical resumes and provide insights to users and administrators. It allows users to upload their resumes in PDF format for analysis, generating detailed reports on their skills, recommended improvements, and job role predictions.
 <br>
