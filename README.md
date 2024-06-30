@@ -211,7 +211,7 @@ Contributions are what make the open-source community such an amazing place to l
 
 <details>
 <summary>📞 Contact</summary>
-Hrushikesh Chothe - [@your_twitter](https://twitter.com/your_twitter) - your_email@example.com
+Hrushikesh Chothe - hrushikeshchothe@gmail.com
 
 Project Link: [https://github.com/hrushi-17/resume-analysis-tool](https://github.com/hrushi-17/resume-analysis-tool)
 </details>
