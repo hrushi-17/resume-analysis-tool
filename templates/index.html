@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Analyzer Hub</title>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+        }
+
+        .container {
+            margin-top: 50px;
+            max-width: 800px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #343a40;
+        }
+
+        form {
+            background-color: rgba(242, 242, 242, 0.5); /* Light gray with 50% opacity */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            color: #343a40;
+            text-align: left;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="file"],
+        input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px;
+            display: inline-block;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"],
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover,
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .address-input {
+            width: 60%;
+            display: inline-block;
+        }
+
+        .city-input {
+            width: 40%;
+            display: inline-block;
+        }
+
+        .state-input,
+        .country-input,
+        .pincode-input {
+            width: 32%;
+            display: inline-block;
+        }
+
+        .pincode-input button {
+            display: block;
+            margin-top: 10px;
+        }
+
+        .carousel-inner img {
+            width: 100%;
+            height: 500px;
+        }
+
+        .dark-mode {
+            background-color: #343a40;
+            color: #f8f9fa;
+        }
+
+        /* Welcome Section Styles */
+        #welcome-section {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 1000;
+            animation: fadeIn 2s;
+            color: white;
+            width: 90%; /* Ensure the section adapts to the carousel size */
+            max-width: 700px; /* Maximum width for larger screens */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Media Queries for Responsive Design */
+        @media (max-width: 768px) {
+            #welcome-section {
+                width: 100%; /* Full width for smaller screens */
+                padding: 0 20px; /* Add padding to ensure content doesn't touch the edges */
+            }
+
+            #welcome-section h1 {
+                font-size: 24px;
+                            font-weight: bold;
+            /* Adjust font size for smaller screens */
+            }
+
+            #welcome-section p {
+                font-size: 16px; /* Adjust font size for smaller screens */
+            }
+        }
+
+        /* Fixed background for carousel */
+        .carousel {
+            background-attachment: fixed;
+        }
+
+        /* Circular button styles */
+        .theme-toggle-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 10px;
+            background-color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .theme-toggle-btn i {
+            font-size: 20px;
+            color: black;
+            transition: color 0.3s;
+        }
+
+        .dark-mode .theme-toggle-btn {
+            background-color: black;
+            color: white;
+        }
+
+        .dark-mode .theme-toggle-btn i {
+            color: white;
+        }
+
+        /* Dark mode styles for text */
+        .dark-mode h1,
+        .dark-mode h2,
+        .dark-mode h3,
+        .dark-mode p,
+        .dark-mode label {
+            color: #f8f9fa;
+        }
+        .dark-mode .theme-toggle-btn {
+            background-color: black;
+            color: white;
+        }
+
+        .dark-mode .theme-toggle-btn i {
+            color: white;
+        }
+
+        /* Dark mode styles for text */
+        .dark-mode h1,
+        .dark-mode h2,
+        .dark-mode h3,
+        .dark-mode p,
+        .dark-mode label,
+        .dark-mode #about h2,
+        .dark-mode #blog h2,
+        .dark-mode #contact h2 {
+            color: #f8f9fa;
+        }
+
+        /* Common Container Styles */
+        .about-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .rectangle {
+            padding: 20px;
+            background-color: rgba(242, 242, 242, 0.5); /* Light gray with 50% opacity */
+            min-height: 150px; /* Ensures a minimum height */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .rectangle-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .rectangle-row .rectangle {
+            flex: 1;
+        }
+
+        .light-gray-bg {
+            background-color: rgba(242, 242, 242, 0.5); /* Light gray with 50% opacity */
+        }
+
+        /* Media Queries for Responsive Design */
+        @media (max-width: 768px) {
+            .rectangle-row {
+                flex-direction: column;
+            }
+
+            .rectangle {
+                min-height: 100px; /* Adjusted for smaller screens */
+            }
+        }
+
+        /* Specific Styles for About Section */
+        #about h2 {
+            color: #343a40;
+        }
+
+        /* Specific Styles for Blog Section */
+        #blog h2 {
+            color: #343a40;
+        }
+
+        /* Specific Styles for Contact Section */
+        #contact h2 {
+            color: #343a40;
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <img src="/static/images/logo.jpg" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+                Resume Analyzer Hub 
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#home" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Home
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#userModeForm" onclick="showUserMode()">User Mode</a>
+                            <a class="dropdown-item" href="#adminModeInfo" onclick="showAdminMode()">Admin Mode</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about" onclick="smoothScroll('#about')">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#blog" onclick="smoothScroll('#blog')">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact" onclick="smoothScroll('#contact')">Contact Us</a>
+                    </li>
+                </ul>
+                <div>
+                    <button class="theme-toggle-btn" onclick="toggleTheme()">
+                        <i class="fas fa-sun" id="theme-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>        
+
+    <div id="welcome-section">
+        <h1>Welcome to Resume Analyzer Hub</h1>
+        <p>Resume Analyzer Hub is your one-stop solution for optimizing your resume. Our platform provides detailed insights and feedback to help job seekers improve their resumes and increase their chances of landing their desired jobs. Whether you are a fresh graduate or an experienced professional, our tools and resources are designed to make your resume stand out.</p>
+    </div>
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/static/images/image1.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="/static/images/image2.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="/static/images/image3.jpg" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
+        data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<div class="container">
+    <!-- Mode Selection Buttons -->
+    <div class="text-center mb-4" id="chooseMode">
+        <h3>Choose Mode</h3>
+        <div>
+            <button onclick="showUserMode()" class="btn btn-danger mr-2">User Mode</button>
+            <button onclick="showAdminMode()" class="btn btn-danger">Admin Mode</button>
+        </div>
+    </div>
+
+    <!-- User Mode Form -->
+    <div id="userModeForm" style="display: none;">
+        <h3 class="text-center mb-4">User Mode</h3>
+        <form action="/" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" class="form-control" name="phone" required>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">
+                        <label for="address" class="col-form-label">Address:</label>
+                        <input type="text" class="form-control address-input" name="address" required>
+                    </div>
+                    <div class="col">
+                        <label for="city" class="col-form-label">City:</label>
+                        <input type="text" class="form-control city-input" name="city" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">
+                        <label for="state" class="col-form-label">State:</label>
+                        <input type="text" class="form-control state-input" name="state" required>
+                    </div>
+                    <div class="col">
+                        <label for="country" class="col-form-label">Country:</label>
+                        <input type="text" class="form-control country-input" name="country" required>
+                    </div>
+                    <div class="col">
+                        <label for="pincode" class="col-form-label">Pincode:</label>
+                        <input type="text" class="form-control pincode-input" name="pincode" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="resume">Upload Your Resume:</label>
+                <input type="file" class="form-control" name="resume" required>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Analyze">
+        </form>
+    </div>
+
+    <!-- Admin Mode Form -->
+    <div id="adminModeInfo" style="display: none;">
+        <h3 class="text-center mb-4">Admin Mode</h3>
+        <form>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="adminLogin()">Login</button>
+        </form>
+    </div>
+
+    <!-- About Section -->
+    <div id="about" class="mt-5">
+        <h2 class="text-center mb-4">About Resume Analyzer Hub</h2>
+        <div class="about-container">
+            <!-- First Rectangle Box -->
+            <div class="rectangle light-gray-bg">
+                <p>
+                    At Resume Analyzer Hub, we understand the importance of a well-crafted resume. Our mission is to help individuals create resumes that effectively showcase their skills and experiences. Our tools analyze various aspects of your resume, including formatting, content, and keyword usage, providing you with actionable feedback to enhance your resume's effectiveness.
+                </p>
+                <p>
+                    Our platform is designed for both users and administrators. Users can easily upload their resumes and receive detailed analysis, while administrators can manage and oversee the resume analysis process.
+                </p>
+            </div>
+            <!-- Two Smaller Rectangle Boxes -->
+            <div class="rectangle-row">
+                <div class="rectangle light-gray-bg">
+                    <p>
+                        <strong>Our Commitment:</strong> We are committed to helping job seekers improve their chances of success by providing top-notch resume analysis services. Our team of experts is dedicated to ensuring that every resume we review meets the highest standards of quality and professionalism.
+                    </p>
+                </div>
+                <div class="rectangle light-gray-bg">
+                    <p>
+                        <strong>Why Choose Us:</strong> We use advanced algorithms and expert insights to deliver comprehensive feedback on your resume. Our goal is to help you present your skills and experience in the best possible light, making you a standout candidate in the job market.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blog Section -->
+    <div id="blog" class="mt-5">
+        <h2 class="text-center mb-4">Latest Blog Posts</h2>
+        <div class="about-container">
+            <!-- First Rectangle Box -->
+            <div class="rectangle light-gray-bg">
+                <p>
+                    Stay updated with our latest insights and tips on resume writing, job searching, and career development.
+                </p>
+                <p>
+                    Our blog is designed to provide valuable information and tips to help you succeed in your job search. From crafting a compelling resume to acing your job interviews, our articles cover a wide range of topics to support your career growth.
+                </p>
+            </div>
+            <!-- Three Smaller Rectangle Boxes -->
+            <div class="rectangle-row">
+                <div class="rectangle light-gray-bg">
+                    <p><strong>How to Craft a Winning Resume</strong></p>
+                </div>
+                <div class="rectangle light-gray-bg">
+                    <p><strong>Top Skills Employers Look For</strong></p>
+                </div>
+                <div class="rectangle light-gray-bg">
+                    <p><strong>Resume Formatting Tips</strong></p>
+                </div>
+            </div>
+            <!-- Expert Advice Rectangle Box -->
+            <div class="rectangle light-gray-bg">
+                <p>
+                    <strong>Expert Advice:</strong> Our team of career experts shares their knowledge and experience to help you navigate the job market with confidence. Learn from the best and stay ahead of the competition with our expert advice.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Us Section -->
+    <div id="contact" class="mt-5">
+        <h2 class="text-center mb-4">Contact Us</h2>
+        <p>Have questions or need support? Get in touch with us!</p>
+        <form>
+            <div class="form-group">
+                <label for="contactName">Name:</label>
+                <input type="text" class="form-control" id="contactName" required>
+            </div>
+            <div class="form-group">
+                <label for="contactEmail">Email:</label>
+                <input type="email" class="form-control" id="contactEmail" required>
+            </div>
+            <div class="form-group">
+                <label for="contactMessage">Message:</label>
+                <textarea class="form-control" id="contactMessage" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+        <!-- Contact Information Rectangle Box -->
+        <div class="rectangle light-gray-bg mt-4">
+            <p>
+                <strong>Contact Information:</strong> If you have any questions or need further assistance, please feel free to reach out to us. Our team is here to help you with all your resume analysis needs. You can contact us via email, phone, or through our website's contact form. We look forward to hearing from you!
+            </p>
+        </div>
+    </div>
+
+    <footer class="text-center mt-4">
+        <p>&copy; 2024 Resume Analyze Hub. All rights reserved.</p>
+    </footer>
+
+    <!-- jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <script>
+        function showUserMode() {
+            document.getElementById('userModeForm').style.display = 'block';
+            document.getElementById('adminModeInfo').style.display = 'none';
+            smoothScroll('#userModeForm');
+        }
+    
+        function showAdminMode() {
+            document.getElementById('userModeForm').style.display = 'none';
+            document.getElementById('adminModeInfo').style.display = 'block';
+            smoothScroll('#adminModeInfo');
+        }
+    
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.getElementById('theme-icon');
+            const button = document.querySelector('.theme-toggle-btn');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                button.style.backgroundColor = 'black';
+                button.style.color = 'white';
+            } else {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                button.style.backgroundColor = 'white';
+                button.style.color = 'black';
+            }
+        }
+    
+        function smoothScroll(target) {
+            document.querySelector(target).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+        function adminLogin() {
+            // Get the values from the login form
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            // Add your authentication logic here (e.g., check username and password)
+            // For demonstration purposes, let's consider a simple username/password check
+            if (username === 'admin' && password === 'password') {
+                // Redirect to admin result page upon successful login
+                window.location.href = "/admin/result";
+            } else {
+                // Handle incorrect credentials (you can render a login error message here)
+                alert("Incorrect username or password. Please try again.");
+            }
+        }
+    </script>        
+    
+</body>
+
+</html>
+

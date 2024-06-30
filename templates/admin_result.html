@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Result</title>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        h1,
+        h2,
+        h4,
+        p {
+            color: #343a40;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .excel-table-container {
+            overflow-x: auto;
+        }
+
+        .excel-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .excel-table th,
+        .excel-table td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .excel-table th {
+            background-color: #f2f2f2;
+        }
+
+        .recommended-skills {
+            max-height: 100px; /* Adjust the maximum height as needed */
+            overflow-y: auto;
+        }
+
+        /* Added styles for the total user div */
+        .total-users {
+            background-color: rgba(215, 248, 221, 0.5); /* Background color with 50% opacity */
+            color: #1c7227; /* Text color */
+            font-weight: bold; /* Bold text */
+            padding: 5px 10px; /* Padding adjusted */
+            border-radius: 5px;
+            margin-top: 10px; /* Margin adjusted */
+            margin-bottom: 10px; /* Margin adjusted */
+            text-align: center;
+            animation: pulse 1.5s infinite alternate;
+            max-height: 40px; /* Reduced height */
+            overflow: hidden; /* Hide overflow */
+        }
+
+        @keyframes pulse {
+            0% {
+                background-color: rgba(215, 248, 221, 0.5);
+            }
+
+            100% {
+                background-color: #d7f8dd;
+            }
+        }
+
+        .pie-chart-container {
+            overflow-x: auto; /* Enable horizontal scrolling if needed */
+            max-width: 100%; /* Allow the container to adjust its width */
+            margin-top: 20px; /* Adjust top margin for spacing */
+            padding: 20px 20px; /* Add padding for spacing */
+            display: flex; /* Use flexbox for alignment */
+            justify-content: center; /* Center the content horizontally */
+            align-items: center; /* Center the content vertically */
+        }
+
+        #pie-chart,
+        #city-pie-chart,
+        #state-pie-chart,
+        #country-pie-chart {
+            width: 100%; /* Make the pie chart container width 100% */
+            height: auto; /* Let the height adjust automatically */
+            max-width: 600px; /* Set a maximum width for the pie chart */
+            margin: 0 auto; /* Center the pie chart horizontally */
+            display: block; /* Ensure the chart is displayed as a block element */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Admin Result Page</h1>
+
+        <div class="card">
+            <h2>User Information:</h2>
+            <div class="excel-table-container">
+                <table class="excel-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>Address</th>
+                            <th>City</th>
+                            <th>State</th>
+                            <th>Country</th>
+                            <th>Pincode</th>
+                            <th>Timestamp</th>
+                            <th>Uploaded Technical Resume Skills</th>
+                            <th>Recommended Skills</th>
+                            <th>Predicted Job Role</th>
+                            <th>Resume Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user_result in users %}
+                        <tr>
+                            <td>{{ user_result.user_data.name }}</td>
+                            <td>{{ user_result.user_data.email }}</td>
+                            <td>{{ user_result.user_data.phone }}</td>
+                            <td>{{ user_result.user_data.address }}</td>
+                            <td>{{ user_result.user_data.city }}</td>
+                            <td>{{ user_result.user_data.state }}</td>
+                            <td>{{ user_result.user_data.country }}</td>
+                            <td>{{ user_result.user_data.pincode }}</td>
+                            <td>{{ user_result.user_data.timestamp }}</td>
+                            <td>{{ ', '.join(user_result.technical_resume_skills) }}</td>
+                            <td class="recommended-skills">
+                                {% for skill in user_result.recommended_skills[:10] %}
+                                <div>{{ skill }}</div>
+                                {% endfor %}
+                            </td>
+                            <td>{{ ', '.join(user_result.recommended_job_roles) }}</td>
+                            <td>{{ user_result.resume_score }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="total-users">
+                <p>Welcome admin! Total {{ total_unique_users }} users have used our tool.</p>
+            </div>
+            <!-- Button to trigger Excel sheet download -->
+            <div class="row mt-3">
+                <div class="col-md-12 text-center">
+                    <a href="/admin/result/download" class="btn btn-primary">Download Excel</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Added section for the pie charts -->
+        <div class="card pie-chart-container">
+            <h2>Predicted Job Role Distribution:</h2>
+            <div id="pie-chart"></div>
+        </div>
+
+        <div class="card pie-chart-container">
+            <h2>City Distribution:</h2>
+            <div id="city-pie-chart"></div>
+        </div>
+
+        <div class="card pie-chart-container">
+            <h2>State Distribution:</h2>
+            <div id="state-pie-chart"></div>
+        </div>
+
+        <div class="card pie-chart-container">
+            <h2>Country Distribution:</h2>
+            <div id="country-pie-chart"></div>
+        </div>
+    </div>
+
+    <!-- JavaScript CDN for Plotly -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+        // Data for the pie charts (passed from the backend)
+        var predictedJobRolesData = JSON.parse('{{ predicted_job_roles_data|tojson|safe }}');
+        var usersData = JSON.parse('{{ users|tojson|safe }}');
+
+        // Function to generate the pie chart for predicted job roles
+        function generatePieChart(data, containerId) {
+            var rolesCount = {};
+            data.forEach(function (role) {
+                rolesCount[role] = (rolesCount[role] || 0) + 1;
+            });
+
+            var labels = Object.keys(rolesCount);
+            var values = Object.values(rolesCount);
+
+            var plotData = [{
+                values: values,
+                labels: labels,
+                type: 'pie'
+            }];
+
+            var layout = {
+                height: 400,
+                width: 500
+            };
+
+            Plotly.newPlot(containerId, plotData, layout);
+        }
+
+        // Function to generate the pie chart for city, state, or country
+        function generateDistributionPieChart(data, field, containerId) {
+            var fieldCount = {};
+            data.forEach(function (user) {
+                var fieldValue = user.user_data[field];
+                fieldCount[fieldValue] = (fieldCount[fieldValue] || 0) + 1;
+            });
+
+            var labels = Object.keys(fieldCount);
+            var values = Object.values(fieldCount);
+
+            var plotData = [{
+                values: values,
+                labels: labels,
+                type: 'pie'
+            }];
+
+            var layout = {
+                height: 400,
+                width: 500
+            };
+
+            Plotly.newPlot(containerId, plotData, layout);
+        }
+
+        // Generate the pie charts
+        generatePieChart(predictedJobRolesData, 'pie-chart');
+        generateDistributionPieChart(usersData, 'city', 'city-pie-chart');
+        generateDistributionPieChart(usersData, 'state', 'state-pie-chart');
+        generateDistributionPieChart(usersData, 'country', 'country-pie-chart');
+    </script>
+</body>
+
+</html>

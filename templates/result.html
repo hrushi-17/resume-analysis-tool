@@ -1,0 +1,476 @@
+<!-- Include the Bootstrap CSS CDN in the head of the document -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Analysis Result</title>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        h1,
+        h2,
+        h4 {
+            color: #343a40;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bolder;
+            
+        }
+
+        p {
+            color: #343a40;
+            text-align: center;
+            margin-bottom: 20px;
+            
+        }
+        
+        .card {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .tips-section {
+            color: #721c24;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .additional-tips-section {
+            background-color: #daf8d7;
+            color: #1c7227;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .responsive-btn-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .responsive-btn {
+            margin: 5px;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        .progress-bar-container {
+            position: relative;
+            height: 100px;
+            width: 100px;
+            margin: 0 auto;
+        }
+
+        .progress-bar-wrapper {
+            position: absolute;
+            height: 50px;
+            width: 100px;
+            clip-path: url(#clip);
+        }
+
+        .progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            box-sizing: border-box;
+            border: 5px solid #eee; /* half gray, */
+            border-bottom-color: #0bf; /* half azure */
+            border-right-color: #0bf;
+            animation: fillProgressBar 1s ease-in-out;
+        }
+
+        .barOverflow {
+            /* Wraps the rotating .bar */
+            position: relative;
+            overflow: hidden; /* Comment this line to understand the trick */
+            width: 120px;
+            height: 45px; /* Half circle (overflow) */
+            margin-bottom: -14px; /* bring the numbers up */
+        }
+
+        .bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 120px;
+            height: 120px; /* full circle! */
+            border-radius: 50%;
+            box-sizing: border-box;
+            border: 5px solid #eee; /* half gray, */
+            border-bottom-color: #0bf; /* half azure */
+            border-right-color: #0bf;
+        }
+
+        .score-label {
+            position: absolute;
+            top: 120%;
+            left: 60%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            font-weight: bold;
+            color: rgb(255, 255, 255);
+        }
+
+        .card {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .certification-list {
+        margin-top: 10px;
+        }
+
+        .analysis-text {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #343a40; /* Dark color */
+        }
+
+        .job-role-list {
+            margin-top: 10px;
+        }
+
+        .job-role-item {
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            background-color: rgba(242, 242, 242, 0.5); /* Light gray with 50% opacity */
+            position: relative;
+            overflow: hidden;
+            border: 4px solid transparent; /* Transparent border */
+            transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .job-role-item:hover {
+            background-color: rgba(0, 0, 0, 0.1); /* Slightly darker background on hover */
+        }
+
+        .job-role-item {
+            font-weight: bold;
+        }
+
+        .job-recommendation-section .analysis-text {
+            color: #1c7227;
+        }
+
+        .job-recommendation-section .certification-list {
+            background-color: #daf8d7;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .job-recommendation-section .certification-item {
+            margin-bottom: 10px; /* Add some space between certification items */
+        }
+
+        .job-recommendation-section .certification-name {
+            font-weight: bold; /* Make certification names bold */
+            color: #333; /* Change the color of certification names */
+        }
+
+        .certification-item {
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            background-color: rgba(242, 242, 242, 0.5); /* Light gray with 50% opacity */
+            position: relative;
+            overflow: hidden;
+            border: 4px solid transparent; /* Transparent border */
+            transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .certification-item:hover {
+            background-color: rgba(0, 0, 0, 1); /* Black with 100% opacity on hover */
+            transform: scale(1.05); /* Zoom in effect on hover */
+        }
+
+        .certification-item:hover .certification-name {
+            color: #ffffff; /* White text color on hover */
+        }
+
+        .certification-item div {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .certification-name {
+            font-weight: bold;
+        }
+
+        .certification-link {
+            padding: 5px 10px;
+            background-color: #4fa1f8; /* Bootstrap primary color */
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .certification-link:hover {
+            background-color: #0056b3; /* Darker shade of primary color on hover */
+        }
+        .youtube-thumbnail {
+            max-width: 100%; /* Set the maximum width of the image to 100% of its container */
+            height: auto; /* Maintain the aspect ratio of the image */
+        }
+
+        .analysis-section {
+            background-color: #daf8d7; /* Background color same as job recommendation section */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .analysis-text {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #1c7227; /* Text color same as job recommendation section */
+        }
+
+        .job-role-item {
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            background-color: rgba(242, 242, 242, 0.5); /* Light gray with 50% opacity */
+            position: relative;
+            overflow: hidden;
+            border: 4px solid transparent; /* Transparent border */
+            transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+            font-weight: bold; /* Make button text bold */
+        }
+
+        .job-role-item:hover {
+            background-color: rgba(0, 0, 0, 0.1); /* Slightly darker background on hover */
+        }
+
+        .responsive-btn-container {
+            margin-top: 10px;
+        }
+
+        .responsive-btn {
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            background-color: rgba(242, 242, 242, 0.5); /* Light gray with 50% opacity */
+            position: relative;
+            overflow: hidden;
+            border: 4px solid transparent; /* Transparent border */
+            transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+            font-weight: bold; /* Make button text bold */
+        }
+
+        .responsive-btn:hover {
+            background-color: rgba(28, 114, 39, 1); /* Slightly darker background on hover */
+            transform: scale(1.05); /* Zoom in effect on hover */
+            color: #ffffff; /* White text color on hover */
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fillProgressBar {
+            to {
+                transform: rotate(180deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Resume Analysis Result</h1>
+
+        <div class="card">
+            <h2>User Information:</h2>
+            <div class="row">
+                <div class="col-md-4 offset-md-4">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td><strong>Name:</strong></td>
+                                <td>{{ result.name }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Email:</strong></td>
+                                <td>{{ result.email }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Phone Number:</strong></td>
+                                <td>{{ result.phone }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <h2>Analysis Results:</h2>
+            <h4 class="mb-2 analysis-text">Uploaded Technical Resume Skills:
+                <div class="analysis-section responsive-btn-container">
+                    {% for skill in result.technical_resume_skills %}
+                        <button type="button" class="btn responsive-btn">{{ skill }}</button>
+                    {% endfor %}
+                </div>
+            </h4>
+
+            <h4 class="mb-2 analysis-text">Headings Present in Resume:
+                <div class="analysis-section responsive-btn-container">
+                    {% for heading in result.present_headings %}
+                        <button type="button" class="btn responsive-btn">{{ heading }}</button>
+                    {% endfor %}
+                </div>
+            </h4>
+
+            <h4 class="mb-2 analysis-text">Recommended Skills:
+                <div class="analysis-section responsive-btn-container">
+                    {% for skill in result.recommended_skills %}
+                        <button type="button" class="btn responsive-btn">{{ skill }}</button>
+                    {% endfor %}
+                </div>
+            </h4>
+
+            <h4 class="mb-2 mt-3 analysis-text">Resume Score:
+                <div class="progress-bar-container">
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar"></div>
+                        <div class="score-label">{{ result.resume_score }}%</div>
+                    </div>
+                </div>
+            </h4>
+        </div>
+
+        <div class="card mt-4">
+            <h2>Tips for Improvement:</h2>
+            <div class="tips-section" id="tips-section">
+                {% if result.tips_for_improvement %}
+                    <ul>
+                        {% for tip in result.tips_for_improvement %}
+                            <li>You didn't have any {{ tip.lower() }}, please add {{ tip.lower() }} to improve your resume score.</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>Great job! Your resume includes all the recommended sections.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <h2>Additional Tips for Present Headings:</h2>
+            <div class="additional-tips-section">
+                {% if result.heading_tips_sentences %}
+                    <ul>
+                        {% for tip_sentence in result.heading_tips_sentences %}
+                            <li>{{ tip_sentence }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="card mt-4 job-recommendation-section">
+            <div class="job-heading">
+                <h2>Recommended Job Roles:</h2>
+            </div>
+            <p class="analysis-text">Our analysis says you are looking for:</p>
+            <div class="certification-list">
+                {% for role in result.recommended_job_roles %}
+                    <div class="certification-item">
+                        <div>
+                            <span class="certification-name">{{ role }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>                                                       
+        <div class="card mt-4">
+            <h2>Certification Recommendation:</h2>
+            <div class="certification-list">
+                {% for certification, link in result.certification_recommendations.items() %}
+                    <div class="certification-item">
+                        <div>
+                            <span class="certification-name">{{ certification }}</span>
+                            <a href="{{ link }}" target="_blank" class="certification-link">Explore</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>           
+        
+        <div class="card mt-4">
+            <h2>YouTube Links for Resume Creation Tips:</h2>
+            {% for topic, link in result.youtube_links.items() %}
+                <p class="mb-2"><a href="{{ link }}" target="_blank">{{ topic }}</a></p>
+                {% set video_id = link.split('/')[-1].split('?')[0] %}
+                <a href="{{ link }}" target="_blank">
+                    <img src="https://img.youtube.com/vi/{{ video_id }}/maxresdefault.jpg" alt="Thumbnail for {{ topic }}" class="youtube-thumbnail">
+                </a>
+            {% endfor %}
+        </div>
+        
+        
+    </div>
+
+    <!-- Clip path definition for the progress bar -->
+    <svg style="display: none;">
+        <defs>
+            <clipPath id="clip" clipPathUnits="objectBoundingBox">
+                <rect x="0" y="0" width="1" height="0.5" />
+            </clipPath>
+        </defs>
+    </svg>
+
+    <script>
+        // Dynamically set the background color based on the condition
+        document.addEventListener("DOMContentLoaded", function () {
+            var tipsSection = document.getElementById("tips-section");
+            if (tipsSection.querySelector("ul")) {
+                tipsSection.style.backgroundColor = "#f8d7da"; // Background color if there are tips
+            } else {
+                tipsSection.style.backgroundColor = "#d7f8dd"; // Background color if there are no tips
+            }
+        });
+    </script>
+</body>
+
+</html>
