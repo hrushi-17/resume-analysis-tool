@@ -1,26 +1,41 @@
-## Resume Analysis Tool
+# Resume Analysis Tool
 # About the Project
 The Resume Analysis Tool is a web application designed to analyze technical resumes and provide insights to users and administrators. It allows users to upload their resumes in PDF format for analysis, generating detailed reports on their skills, recommended improvements, and job role predictions.
-
+<br>
 # Scope
 This project aims to assist job seekers in optimizing their resumes by providing actionable insights based on uploaded content. It also includes administrative functionalities to manage user data and view analytics.
-
+<br>
 # Tech Stack
 Frontend
+<br>
 HTML
+<br>
 CSS (Bootstrap)
+<br>
 JavaScript (Plotly for charts)
+<br>
 Backend
+<br>
 Python
+<br>
 Flask framework
+<br>
 Database
+<br>
 SQLite (for local development)
+<br>
 PostgreSQL (for production)
+<br>
 Modules
+<br>
 Flask (web framework)
+<br>
 Pandas (data manipulation)
+<br>
 Plotly (data visualization)
+<br>
 Bootstrap (CSS framework)
+<br>
 
 # Features
 User Side
