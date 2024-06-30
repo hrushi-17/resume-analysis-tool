@@ -1,14 +1,24 @@
 # 🎓📄 Resume Analysis Tool
 
 ## 📘 About the Project
-The Resume Analysis Tool is a sophisticated web application developed to analyze technical resumes and provide valuable insights. This tool is designed to assist job seekers in refining their resumes and increasing their chances of landing their desired roles. It leverages machine learning and natural language processing techniques to evaluate the content of resumes, offering users personalized feedback.
+The Resume Analysis Tool is a comprehensive web application designed to help job seekers analyze their resumes and provide actionable feedback. This tool scans resumes to extract key information and offers suggestions for improvement. It aims to enhance the quality of resumes, making them more attractive to potential employers. The tool utilizes natural language processing (NLP) techniques to parse the resume content and evaluate it against industry standards.
+
+### Key Features:
+- **PDF Resume Upload**: Users can upload their resumes in PDF format.
+- **Detailed Analysis**: The tool extracts key skills and experiences and provides a detailed analysis.
+- **Skill Recommendations**: It suggests skills that can be added to improve the resume.
+- **Resume Scoring**: Provides a score based on various criteria to help users understand the strengths and weaknesses of their resumes.
+- **Job Role Prediction**: Suggests potential job roles based on the resume content.
+- **Admin Dashboard**: Allows administrators to view all user submissions, download data in Excel format, and visualize data through interactive charts.
+
+The frontend is developed using HTML, CSS (Bootstrap), and JavaScript (Plotly for charts). The backend is built with Python and Flask, leveraging libraries like PyPDF2, NLTK, and spaCy for data extraction and analysis.
 
 ## 📈 Scope
 This project aims to:
-- Provide job seekers with a detailed analysis of their resumes.
-- Recommend improvements based on industry standards and trends.
-- Predict suitable job roles for users based on their resume content.
-- Offer administrators an interface to manage user data and view analytical reports.
+- Assist job seekers in enhancing their resumes by providing detailed feedback and suggestions.
+- Predict suitable job roles for users based on the content of their resumes.
+- Provide administrators with tools to manage and analyze user data effectively.
+- Improve the overall quality of resumes, making job seekers more competitive in the job market.
 
 ## 🛠️ Tech Stack
 
@@ -21,15 +31,14 @@ This project aims to:
 - **Python**: The core programming language used for developing the application.
 - **Flask**: A lightweight WSGI web application framework used for building the backend services.
 
-### 🗄️ Database
-- **SQLite**: Used for local development and testing.
-- **PostgreSQL**: Used for production to handle larger datasets and provide more robust data management.
-
 ### 📦 Modules
 - **Flask**: For web framework.
 - **Pandas**: For data manipulation and analysis.
 - **Plotly**: For creating interactive data visualizations.
 - **Bootstrap**: For responsive design and UI components.
+- **PyPDF2**: For PDF parsing.
+- **NLTK**: For natural language processing.
+- **spaCy**: For advanced natural language processing.
 
 ## ⭐ Features
 
@@ -52,8 +61,9 @@ This project aims to:
 - Flask
 - Plotly
 - Pandas
-- SQLAlchemy (for PostgreSQL)
-- Flask-WTF (for form handling)
+- PyPDF2
+- NLTK
+- spaCy
 
 ## 🛠️ Setup and Installation Guide
 
@@ -129,7 +139,7 @@ This project aims to:
 2. Ensure the virtual environment is activated.
 3. Run the Flask application:
     ```sh
-    flask run
+    python app.py
     ```
 4. Open a web browser and navigate to `http://127.0.0.1:5000`.
 </details>
@@ -159,9 +169,51 @@ This project aims to:
 4. Run the Flask Application
     - In the VS Code terminal, run the Flask application:
       ```sh
-      flask run
+      python app.py
       ```
     - Open a web browser and navigate to `http://127.0.0.1:5000`.
+</details>
+
+<details>
+<summary>📥 Download and Installation</summary>
+
+### Clone the Repository
+```sh
+git clone https://github.com/hrushi-17/resume-analysis-tool.git
+cd resume-analysis-tool
+```
+<details>
+<summary>📥 Download ZIP File</summary>
+
+1. Go to [GitHub Repository](https://github.com/hrushi-17/resume-analysis-tool).
+2. Click on the "Code" button.
+3. Select "Download ZIP".
+4. Extract the ZIP file.
+5. Navigate to the extracted folder in your terminal.
+6. Continue with the [setup and installation guide](#setup-and-installation-guide).
+</details>
+
+<details>
+<summary>📝 License</summary>
+Distributed under the MIT License. See `LICENSE` for more information.
+</details>
+
+<details>
+<summary>🤝 Contributing</summary>
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project.
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`).
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`).
+4. Push to the Branch (`git push origin feature/AmazingFeature`).
+5. Open a Pull Request.
+</details>
+
+<details>
+<summary>📞 Contact</summary>
+Hrushikesh Chothe - [@your_twitter](https://twitter.com/your_twitter) - your_email@example.com
+
+Project Link: [https://github.com/hrushi-17/resume-analysis-tool](https://github.com/hrushi-17/resume-analysis-tool)
 </details>
 
 ## 🚀 Usage
@@ -188,11 +240,3 @@ The future developments for the Resume Analysis Tool include:
 
 ### Admin Side
 ![Admin Interface](path/to/admin_interface_screenshot.png)
-
-## 📥 Download and Installation
-You can download the project by cloning the repository or downloading the ZIP file.
-
-### Clone the Repository
-```sh
-git clone https://github.com/hrushi-17/resume-analysis-tool.git
-cd resume-analysis-tool
