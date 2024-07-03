@@ -237,9 +237,6 @@ The future developments for the Resume Analysis Tool include:
 
 ## 📸 Preview
 
-### Website
-![User Interface](C:\Users\ASUS\OneDrive\Pictures\Screenshots\Screenshot 2024-07-03 221501.png)
-
 ### User Side
 ![User Interface](path/to/user_interface_screenshot.png)
 
