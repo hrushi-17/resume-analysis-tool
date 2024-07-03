@@ -182,6 +182,8 @@ This project aims to:
 git clone https://github.com/hrushi-17/resume-analysis-tool.git
 cd resume-analysis-tool
 ```
+</details>
+
 <details>
 <summary>📥 Download ZIP File</summary>
 
