@@ -238,7 +238,9 @@ The future developments for the Resume Analysis Tool include:
 ## 📸 Preview
 
 ### User Side
-![User Interface](resume-analysis-tool/screenshots/home1.png)
+![home page](./screenshot/home1.png)
+
 
 ### Admin Side
-![Admin Interface](path/to/admin_interface_screenshot.png)
+![Screenshot Description](./screenshot/your_screenshot.png)
+
