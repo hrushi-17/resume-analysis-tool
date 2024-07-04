@@ -237,10 +237,36 @@ The future developments for the Resume Analysis Tool include:
 
 ## 📸 Preview
 
-### User Side
-![home page](./screenshots/home1.png)
+### Website
 
+#### Home
+![Home page](./screenshots/home1.png)
+![Home page](./screenshots/home2.png)
+![Home page](./screenshots/home3.png)
+
+#### About
+![About page](./screenshots/about.png)
+
+#### Blog
+![Blog page](./screenshots/blog.png)
+
+#### Contact
+![Contact page](./screenshots/contact.png)
+
+### User Side
+
+#### User side
+![User page](./screenshots/user_side1.png)
+![User page](./screenshots/user_side2.png)
+![User page](./screenshots/user_side3.png)
+![User page](./screenshots/user_side4.png)
+![User page](./screenshots/user_side5.png)
+![User page](./screenshots/user_side6.png)
+![User page](./screenshots/user_side7.png)
 
 ### Admin Side
-![Screenshot Description](./screenshot/your_screenshot.png)
 
+#### Admin side
+![Admin page](./screenshots/admin_side1.png)
+![Admin page](./screenshots/admin_side2.png)
+![Admin page](./screenshots/admin_side3.png)
