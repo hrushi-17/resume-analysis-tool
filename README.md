@@ -238,8 +238,7 @@ The future developments for the Resume Analysis Tool include:
 ## 📸 Preview
 
 ### User Side
-![User Interface]("C:\Users\ASUS\OneDrive\Pictures\Screenshots\New folder\home1.png")
+![User Interface](path/to/user_interface_screenshot.png)
 
 ### Admin Side
 ![Admin Interface](path/to/admin_interface_screenshot.png)
-
